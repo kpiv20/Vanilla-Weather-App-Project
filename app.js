@@ -31,8 +31,19 @@ dateElement.innerHTML=formatDate(response.data.dt*1000);
 iconElement.setAttribute ("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
 }
 
+function search(city){
 let apiKey= "b5fb4a526e24f0e48b27c52886b74e1a"
-let city= "Anchorage"
 let apiUrl= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-
 axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit(event){
+    event.preventDefault();
+  let cityInputElement=document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+search ("Atlanta");
+
+let form= document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
