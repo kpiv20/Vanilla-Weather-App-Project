@@ -25,7 +25,7 @@ body {
     font-weight: 100;
     line-height: 19px;
   }
-  
+        
   li:first-letter {
     text-transform: capitalize;
   }
@@ -90,4 +90,12 @@ body {
   
   .weather-forecast-temperatures {
     font-size: 13px;
+  }
+
+  #celsius-link{
+text-decoration:none;
+  }
+  
+  #fahrenheit-link{
+    text-decoration: none;
   }
