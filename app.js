@@ -58,7 +58,7 @@ function displayForecast(response) {
 function getForecast(coordinates){
     console.log(coordinates);
     let apiKey= "b5fb4a526e24f0e48b27c52886b74e1a";
-    let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+    let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
     console.log(apiUrl);
     axios.get(apiUrl).then(displayForecast);
 }
@@ -73,9 +73,9 @@ let iconElement=document.querySelector("#icon")
 
 celsiusTemperature=response.data.main.temp;
 
-temperatureElement.innerHTML=Math.round(celsiusTemperature=response.data.main.temp
-    );
+temperatureElement.innerHTML=Math.round(celsiusTemperature=response.data.main.temp);
 cityElement.innerHTML=response.data.name;
+console.log(response);
 descriptionElement.innerHTML=response.data.weather[0].description;
 humidityElement.innerHTML=response.data.main.humidity;
 windElement.innerHTML=Math.round(response.data.wind.speed);
@@ -87,7 +87,7 @@ getForecast(response.data.coord);
 
 function search(city){
 let apiKey= "b5fb4a526e24f0e48b27c52886b74e1a";
-let apiUrl= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+let apiUrl= `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`
 axios.get(apiUrl).then(displayTemperature);
 }
 
@@ -96,37 +96,8 @@ function handleSubmit(event){
   let cityInputElement=document.querySelector("#city-input");
   search(cityInputElement.value);
 }
-function displayCelsiusTemp(event){
-    event.preventDefault();
-    let temperatureElement=document.querySelector("#temperature");
-    celsiusLink.classList.add("active");
-    fahrenheitLink.classList.remove("active");
-    temperatureElement.innerHTML=Math.round(celsiusTemperature);
-
-}
-
-function displayFahrenheitTemp(event){
-    event.preventDefault();
-    let temperatureElement=document.querySelector("#temperature");
-    
-    celsiusLink.classList.remove("active");
-    fahrenheitLink.classList.add("active");
-    let fahrenheitTemp= (celsiusTemperature*9)/5+32;
-   
-    temperatureElement.innerHTML=Math.round(fahrenheitTemp);
-
-}
-
-let celsiusTemperature= null;
-
 
 let form= document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
-
-let celsiusLink= document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemp);
-
-let fahrenheitLink= document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
 
 search ("Atlanta");
