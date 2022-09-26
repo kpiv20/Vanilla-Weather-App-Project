@@ -37,12 +37,12 @@ body {
  
 body.light-mode{
   color: #eee;
-  background-color: #1111;
+  background-color: #111;
 }
 
 body.dark-mode{
   text-align:left;
-  color: #1111;
+  color: #111;
   background-color: #eee;
 }
 
@@ -115,7 +115,6 @@ body.dark-mode{
     text-decoration: none;
   }
   
-
   .weather-forecast {
     margin-top: 20px;
     text-align: center;
@@ -151,4 +150,5 @@ body.dark-mode{
   #footer{
     color:bisque;
     font-family: "Trirong", serif;
+    display: block;
   }
