@@ -1,10 +1,8 @@
-
 function toggleDarkLight() {
     var body = document.getElementById("body");
     var currentClass = body.className;
     body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
   }
-
 
 function formatDate(timestamp){
     let date= new Date(timestamp);
@@ -71,11 +69,11 @@ let windElement=document.querySelector("#wind");
 let dateElement=document.querySelector("#date");
 let iconElement=document.querySelector("#icon")
 
-celsiusTemperature=response.data.main.temp;
 
-temperatureElement.innerHTML=Math.round(celsiusTemperature=response.data.main.temp);
+fahrenheitTemperature=response.data.main.temp;
+
+temperatureElement.innerHTML=Math.round(fahrenheitTemperature=response.data.main.temp);
 cityElement.innerHTML=response.data.name;
-console.log(response);
 descriptionElement.innerHTML=response.data.weather[0].description;
 humidityElement.innerHTML=response.data.main.humidity;
 windElement.innerHTML=Math.round(response.data.wind.speed);
@@ -97,7 +95,21 @@ function handleSubmit(event){
   search(cityInputElement.value);
 }
 
+function searchLocation(position) {
+    let apiKey = "b5fb4a526e24f0e48b27c52886b74e1a";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
+  
+    axios.get(apiUrl).then(displayTemperature);
+  }
+  function getCurrentLocation(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(searchLocation);
+  }
+  
 let form= document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", getCurrentLocation);
 
 search ("Atlanta");
