@@ -69,10 +69,10 @@ let windElement=document.querySelector("#wind");
 let dateElement=document.querySelector("#date");
 let iconElement=document.querySelector("#icon")
 
+fahrenheitTemp= response.data.main.temp
 
-fahrenheitTemperature=response.data.main.temp;
 
-temperatureElement.innerHTML=Math.round(fahrenheitTemperature=response.data.main.temp);
+temperatureElement.innerHTML=Math.round(fahrenheitTemp=response.data.main.temp);
 cityElement.innerHTML=response.data.name;
 descriptionElement.innerHTML=response.data.weather[0].description;
 humidityElement.innerHTML=response.data.main.humidity;
@@ -95,6 +95,28 @@ function handleSubmit(event){
   search(cityInputElement.value);
 }
 
+function displayCelsiusTemp(event){
+ event.preventDefault();
+ let temperatureElement=document.querySelector("#temperature");
+
+
+fahrenheitLink.classList.remove("active");
+celsiusLink.classList.add("active");
+let celsiusTemp=((fahrenheitTemp-32)*5/9);
+temperatureElement.innerHTML=Math.round(celsiusTemp);
+}
+
+function displayFahrenheitTemp(event){
+    event.preventDefault();
+    fahrenheitLink.classList.add("active");
+    celsiusLink.classList.remove("active");
+    let temperatureElement=
+    document.querySelector("#temperature");
+    temperatureElement.innerHTML=Math.round(fahrenheitTemp);
+}
+
+let fahrenheitTemp=null;
+
 function searchLocation(position) {
     let apiKey = "b5fb4a526e24f0e48b27c52886b74e1a";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
@@ -111,5 +133,11 @@ form.addEventListener("submit", handleSubmit);
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+
+let celsiusLink=document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemp);
+
+let fahrenheitLink=document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
 
 search ("Atlanta");
