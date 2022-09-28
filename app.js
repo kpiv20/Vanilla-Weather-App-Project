@@ -72,7 +72,7 @@ let iconElement=document.querySelector("#icon")
 fahrenheitTemp= response.data.main.temp
 
 
-temperatureElement.innerHTML=Math.round(fahrenheitTemp=response.data.main.temp);
+temperatureElement.innerHTML=Math.round(fahrenheitTemp);
 cityElement.innerHTML=response.data.name;
 descriptionElement.innerHTML=response.data.weather[0].description;
 humidityElement.innerHTML=response.data.main.humidity;
@@ -98,10 +98,8 @@ function handleSubmit(event){
 function displayCelsiusTemp(event){
  event.preventDefault();
  let temperatureElement=document.querySelector("#temperature");
-
-
+ celsiusLink.classList.add("active");
 fahrenheitLink.classList.remove("active");
-celsiusLink.classList.add("active");
 let celsiusTemp=((fahrenheitTemp-32)*5/9);
 temperatureElement.innerHTML=Math.round(celsiusTemp);
 }
