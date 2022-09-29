@@ -93,6 +93,8 @@ function handleSubmit(event){
     event.preventDefault();
   let cityInputElement=document.querySelector("#city-input");
   search(cityInputElement.value);
+  fahrenheitLink.classList.add("active");
+celsiusLink.classList.remove("active");
 }
 
 function displayCelsiusTemp(event){
